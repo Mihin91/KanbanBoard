@@ -35,7 +35,7 @@ function Header() {
             {/*Right side*/}
 
             <div className=' flex space-x-4 items-center md:space-x-6'>
-                <button className= ' button'>
+                <button className= ' hidden md:block button'>
                     + Add New Task
                 </button>
                 <button className=' button py-1 px-3 md:hidden'>
@@ -47,7 +47,7 @@ function Header() {
             </div>
         </header>
 
-        {openDropdown && <HeaderDropdown/>}
+        {openDropdown && <HeaderDropdown setOpenDropdown={setOpenDropdown}/>}
     </div>
   )
 }
