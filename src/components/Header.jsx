@@ -5,14 +5,19 @@ import iconUp from "../assets/icon-chevron-up.svg"
 import ellipsis from "../assets/icon-vertical-ellipsis.svg"
 import HeaderDropdown from './HeaderDropdown'
 import AddEditBoardModal from '../modals/AddEditBoardModal'
+import AddEditTask from '../modals/AddEditTask'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 
 function Header({setBoardModalOpen , boardModalOpen}) {
 
     const [openDropdown, setOpenDropdown] = useState(false)
+    const [openAddEditTask, setOpenAddEditTask] = useState(false)
     const [ boardtype ,  setBoardType] = useState('add')
 
+    const boards = useSelector( state => state.boards)
+    const board = boards.find( board => board.isActive)
 
   return (
     <div className =' p-4 fixed left-0 bg-white dark:bg-[#2b2d42] z-50 right-0'>
@@ -27,7 +32,7 @@ function Header({setBoardModalOpen , boardModalOpen}) {
                 </h3>
                 <div className=' flex items-center'>
                     <h3 className=' truncate max-w-[200px] md:text-2xl text-xl font-bold md:ml-20 '>
-                        board Name
+                        {boards.name}
                     </h3>
                     <img src={openDropdown ? iconUp: iconDown} alt="dropdown icon" className=' w-3 ml-2 md:hidden '
                     onClick={() => setOpenDropdown(state => !state)}/>
@@ -40,7 +45,11 @@ function Header({setBoardModalOpen , boardModalOpen}) {
                 <button className= ' hidden md:block button'>
                     + Add New Task
                 </button>
-                <button className=' button py-1 px-3 md:hidden'>
+                <button 
+                onClick={() => {
+                    setOpenAddEditTask(state => !state)
+                }}
+                className=' button py-1 px-3 md:hidden'>
                     +
                 </button>
 
@@ -55,6 +64,11 @@ function Header({setBoardModalOpen , boardModalOpen}) {
         {
             boardModalOpen && <AddEditBoardModal type={boardtype} setBoardModalOpen = 
             {setBoardModalOpen}/>
+        }
+
+        {
+            openAddEditTask && <AddEditTask setOpenAddEditTask={setOpenAddEditTask} device='mobile'/>
+
         }
     </div>
   )

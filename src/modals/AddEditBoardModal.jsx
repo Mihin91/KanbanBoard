@@ -1,13 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
-import { v4 as uuidv4, validate } from 'uuid'
+import { v4 as uuidv4} from 'uuid'
 import crossIcon from "../assets/icon-cross.svg"
 import { useDispatch } from 'react-redux';
 import boardSlices from '../redux/boardsSlice'
 
 function AddEditBoardModal({setBoardModalOpen , type ,}) {
 
-    const dispatch = useState()
+    const dispatch = useDispatch()
     const [name, setname] = useState('')
     const [isValid, setIsValid] = useState(true)
 
@@ -17,6 +17,7 @@ function AddEditBoardModal({setBoardModalOpen , type ,}) {
         {name: 'Todo' , task :  [] , id : uuidv4()},
         {name: 'Doing' , task :  [] , id : uuidv4()}
     ])
+    
 
     const onChange = (id , newValue) => {
         setNewColumns((pervState) => {
@@ -31,7 +32,7 @@ function AddEditBoardModal({setBoardModalOpen , type ,}) {
         setNewColumns((perState) => perState.filter((el) => el.id !== id))
     }
 
-    const validate = () => {
+    const validated = () => {
         setIsValid(false)
         if(!name.trim()){
             return false
@@ -144,7 +145,7 @@ function AddEditBoardModal({setBoardModalOpen , type ,}) {
                         dark:bg-[#635fc7] mt-8 relative text-white bg-[#635fc7] py-2 rounded-full'
                         onClick={
                             () => {
-                                const isvalid = validate()
+                                const isValid = validated()
                                 if(isValid === true) onSubmit(type)
                             }
                         }
