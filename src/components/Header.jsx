@@ -7,17 +7,30 @@ import HeaderDropdown from './HeaderDropdown'
 import AddEditBoardModal from '../modals/AddEditBoardModal'
 import AddEditTask from '../modals/AddEditTask'
 import { useDispatch, useSelector } from 'react-redux'
+import ElipsisMenu from './ElipsisMenu'
 
 
 
 function Header({setBoardModalOpen , boardModalOpen}) {
 
     const [openDropdown, setOpenDropdown] = useState(false)
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [openAddEditTask, setOpenAddEditTask] = useState(false)
+    const [isElipsisOpen, setIsElipsisOpen] = useState(false)
     const [ boardtype ,  setBoardType] = useState('add')
 
     const boards = useSelector( state => state.boards)
     const board = boards.find( board => board.isActive)
+
+    const setOpenEditModal = () => {
+        setBoardModalOpen(true)
+        setIsElipsisOpen(false)
+    }
+
+    const setOpenDeleteModal = () => {
+        setIsDeleteModalOpen(true)
+        setIsElipsisOpen(false)
+    }
 
   return (
     <div className =' p-4 fixed left-0 bg-white dark:bg-[#2b2d42] z-50 right-0'>
@@ -32,7 +45,7 @@ function Header({setBoardModalOpen , boardModalOpen}) {
                 </h3>
                 <div className=' flex items-center'>
                     <h3 className=' truncate max-w-[200px] md:text-2xl text-xl font-bold md:ml-20 '>
-                        {boards.name}
+                        {board?.name}
                     </h3>
                     <img src={openDropdown ? iconUp: iconDown} alt="dropdown icon" className=' w-3 ml-2 md:hidden '
                     onClick={() => setOpenDropdown(state => !state)}/>
@@ -53,7 +66,18 @@ function Header({setBoardModalOpen , boardModalOpen}) {
                     +
                 </button>
 
-                <img src={ellipsis} alt="ellipsis" className=' cursor-pointer h-6'/>
+                <img src={ellipsis} onClick={() => {
+                    setBoardType('edit')
+                    setOpenDropdown(false)
+                    setIsElipsisOpen(state => !state)
+                }}alt="ellipsis" className=' cursor-pointer h-6'/>
+
+                {
+                    isElipsisOpen && <ElipsisMenu 
+                    setOpenDeleteModal={setIsDeleteModalOpen}
+                    setOpenEditModal={setOpenEditModal}
+                    type='Boards'/>
+                }
 
             </div>
         </header>
@@ -67,7 +91,8 @@ function Header({setBoardModalOpen , boardModalOpen}) {
         }
 
         {
-            openAddEditTask && <AddEditTask setOpenAddEditTask={setOpenAddEditTask} device='mobile'/>
+            openAddEditTask && <AddEditTask setOpenAddEditTask={setOpenAddEditTask} device='mobile'
+            type='add'/>
 
         }
     </div>
