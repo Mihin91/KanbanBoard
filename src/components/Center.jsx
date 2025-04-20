@@ -2,6 +2,7 @@ import React, {  useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import Column from './Column'
+import SideBar from './SideBar'
 
 
 function Center({boardModalOpen , setBoardModalOpen}) {
