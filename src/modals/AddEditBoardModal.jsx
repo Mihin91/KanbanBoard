@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { v4 as uuidv4} from 'uuid'
 import crossIcon from "../assets/icon-cross.svg"
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import boardSlices from '../redux/boardsSlice'
 
 function AddEditBoardModal({setBoardModalOpen , type ,}) {
 
     const dispatch = useDispatch()
-    const [name, setname] = useState('')
+    const [name, setName] = useState('')
+    const [isFirstLoad, setisFirstLoad] = useState(true)
     const [isValid, setIsValid] = useState(true)
+    const board = useSelector((state) =>
+        state.boards.find((board) => board.isActive)
+      );
+      
 
 
 
@@ -17,7 +23,22 @@ function AddEditBoardModal({setBoardModalOpen , type ,}) {
         {name: 'Todo' , task :  [] , id : uuidv4()},
         {name: 'Doing' , task :  [] , id : uuidv4()}
     ])
+
     
+    if (type === 'edit' && isFirstLoad) {
+        if (board && board.columns) {
+          setNewColumns(
+            board.columns.map((col) => {
+              return { ...col, id: uuidv4() };
+            })
+          );
+          setName(board.name);
+           setisFirstLoad(false);
+        }
+       
+      }
+      
+
 
     const onChange = (id , newValue) => {
         setNewColumns((pervState) => {
@@ -92,7 +113,7 @@ function AddEditBoardModal({setBoardModalOpen , type ,}) {
                 placeholder='e.g Web Design'
                 value={name}
                 onChange={(e) => {
-                    setname(e.target.value);
+                    setName(e.target.value);
                 }}
                 id='board-name-input'
                 />
