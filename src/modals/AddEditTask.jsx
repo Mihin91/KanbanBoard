@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4} from 'uuid'
 import crossIcon from "../assets/icon-cross.svg";
 import { useSelector } from 'react-redux';
@@ -27,24 +27,33 @@ function AddEditTask({ type , device, setOpenAddEditTask, setIsTaskModalOpen,
 
     const [status, setStatus] = useState(columns[pervColIndex]?.name || '')
     const [newColIndex, setnewColIndex] = useState(pervColIndex)
-    const [subtasks, setSubtasks ]= useState(
+    const [subtasks, setSubtasks ]= useState( 
         [
             {title :  '', isCompleted : false , id : uuidv4() },
             {title :  '', isCompleted : false , id : uuidv4() }
         ]
     )
 
-
-    if ( type === 'edit' && isFirstLoad){
-        setSubtasks(
-            task.subtasks.map((subtask) => {
-                return { ...subtask , id: uuidv4() }
-            })
-        )
-        setTitle(task.title)
-        setDescription(task.description)
-        setIsFirstLoad(false)
-    }
+    useEffect(() => {
+        if (
+          type === 'edit' &&
+          isFirstLoad &&
+          task &&
+          Array.isArray(task.subtasks)
+        ) {
+          setSubtasks(
+            task.subtasks.map((subtask) => ({
+              ...subtask,
+              id: uuidv4(),
+            }))
+          )
+          setTitle(task.title)
+          setDescription(task.description)
+          setIsFirstLoad(false)
+        }
+      }, [type, isFirstLoad, task])
+      
+      
     const onChange = (id , newValue) => {
         setSubtasks((pervState) => {
             const newState = [...pervState]
