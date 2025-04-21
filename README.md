@@ -1,7 +1,8 @@
 # Kanban Board
 
 
-Table of Contents
+# Table of Contents
+
 Overview
 
 Getting Started
