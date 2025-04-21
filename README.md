@@ -39,3 +39,22 @@ Clone the repository:
 ```bash
 git clone https://github.com/your-username/kanban-board.git
 cd kanban-board
+
+```
+### Usage
+
+To start the development server, run:
+``` bash
+npm start
+
+```
+
+Testing
+To run the test suite, use:
+
+bash Copy Edit npm test This will launch the test runner in interactive watch mode. You can also run:
+
+bash Copy Edit npm run test:coverage To generate a coverage report.
+
+bash Copy Edit npm start This will launch the app in development mode.
+
