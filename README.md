@@ -1,7 +1,7 @@
 # Kanban Board
 
 
-# Table of Contents
+## Table of Contents
 
 Overview
 
@@ -15,7 +15,7 @@ Usage
 
 Testing
 
-Overview
+## Overview
 KanbanBoard is a powerful task management tool that leverages the Kanban methodology to streamline project workflows, enabling developers to create, organize, and track tasks visually.
 
 Why KanbanBoard?
@@ -33,15 +33,16 @@ This project enhances productivity and collaboration through an intuitive interf
 
 🛠️ Modular Components: Promotes reusability and maintainability of UI elements, streamlining development.
 
-Getting Started
-Prerequisites
+## Getting Started
+
+### Prerequisites
 This project requires the following dependencies:
 
 Programming Language: JavaScript
 
 Package Manager: Npm
 
-Installation
+### Installation
 Clone the repository:
 
 bash
@@ -55,8 +56,26 @@ bash
 Copy
 Edit
 npm install
-Usage
+
+
+### Usage
 To start the development server, run:
+
+### Testing
+To run the test suite, use:
+
+bash
+Copy
+Edit
+npm test
+This will launch the test runner in interactive watch mode.
+You can also run:
+
+bash
+Copy
+Edit
+npm run test:coverage
+To generate a coverage report.
 
 bash
 Copy
