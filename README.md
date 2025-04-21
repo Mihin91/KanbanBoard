@@ -49,7 +49,8 @@ npm start
 
 ```
 
-Testing
+### Testing
+
 To run the test suite, use:
 
 ```bash
