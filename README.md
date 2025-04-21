@@ -52,9 +52,18 @@ npm start
 Testing
 To run the test suite, use:
 
-bash Copy Edit npm test This will launch the test runner in interactive watch mode. You can also run:
+```bash
+npm test
+```
+This will launch the test runner in interactive watch mode. You can also run:
 
-bash Copy Edit npm run test:coverage To generate a coverage report.
+```bash
+npm run test:coverage 
+```
+To generate a coverage report.
 
-bash Copy Edit npm start This will launch the app in development mode.
+```bash
+npm start 
+```
+This will launch the app in development mode.
 
