@@ -5,15 +5,17 @@ const boardSlice = createSlice({
     name: 'boards',
     initialState: data.boards,
     reducers : {
-        addBoard: (state, action) => {
+          addBoard: (state, action) => {
             const isActive = state.length > 0 ? false : true;
             const payload = action.payload;
             const board = {
               name: payload.name,
               isActive,
-              columns: [],
+              columns: payload.newColumns.map(column => ({
+                ...column,
+                tasks: [] 
+              })),
             };
-            board.columns = payload.newColumns;
             state.push(board);
           },
           editBoard: (state, action) => {

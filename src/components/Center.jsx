@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Column from './Column'
 import SideBar from './SideBar'
 import AddEditBoardModal from '../modals/AddEditBoardModal'
+import EmptyBoard from './EmptyBoard'
 
 
 function Center({boardModalOpen , setBoardModalOpen}) {
